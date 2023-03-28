@@ -1,12 +1,13 @@
 import { Banner } from './components/Banner'
 import { CoffeeCard } from './components/CoffeeCard'
-import { CardListContainer } from './styles'
+import { CardList, HomeContainer } from './styles'
 
 export function Home() {
   return (
-    <div>
+    <HomeContainer>
       <Banner />
-      <CardListContainer>
+      <h2>Nossos cafés</h2>
+      <CardList>
         <CoffeeCard />
         <CoffeeCard />
         <CoffeeCard />
@@ -20,7 +21,7 @@ export function Home() {
         <CoffeeCard />
         <CoffeeCard />
         <CoffeeCard />
-      </CardListContainer>
-    </div>
+      </CardList>
+    </HomeContainer>
   )
 }
