@@ -4,6 +4,7 @@ import {
   CheckoutContainer,
   SelectedCoffeesBox,
   AddressForm,
+  FormInput,
 } from './styles'
 
 export function Checkout() {
@@ -19,6 +20,18 @@ export function Checkout() {
               <p>Informe o endereço onde deseja receber seu pedido</p>
             </div>
           </header>
+          <form action="">
+            <FormInput placeholder="CEP" />
+
+            <FormInput placeholder="Rua" />
+
+            <FormInput placeholder="Número" />
+            <FormInput placeholder="Complemento" />
+
+            <FormInput placeholder="Bairro" />
+            <FormInput placeholder="Cidade" />
+            <FormInput placeholder="UF" />
+          </form>
         </AddressForm>
       </OrderInformationBox>
       <SelectedCoffeesBox>
