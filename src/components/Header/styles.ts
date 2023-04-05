@@ -27,7 +27,6 @@ export const Location = styled.div`
 
   p {
     font-size: 14px;
-    line-height: 18.2;
     color: ${(props) => props.theme['purple-dark']};
   }
 
