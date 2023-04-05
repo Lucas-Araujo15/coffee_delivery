@@ -7,6 +7,7 @@ import {
 } from './styles'
 import { AddressForm } from './components/AddressForm'
 import { PaymentMethod } from './components/PaymentMethod'
+import { CoffeeSelected } from './components/CoffeeSelected'
 
 export function Checkout() {
   return (
@@ -21,6 +22,11 @@ export function Checkout() {
       <SelectedCoffeesBox>
         <h2>Cafés selecionados</h2>
         <div>
+          <div>
+            <CoffeeSelected />
+            <CoffeeSelected />
+          </div>
+
           <PriceInformation>
             <div>
               <p>Total de itens</p>

@@ -4,7 +4,7 @@ export const CheckoutContainer = styled.div`
   display: grid;
   grid-template-columns: 40rem 1fr;
   gap: 2rem;
-  margin-top: 2.5rem;
+  margin: 2.5rem auto;
 
   h2 {
     font-family: 'Baloo 2';
@@ -23,11 +23,12 @@ export const OrderInformationBox = styled.div`
     height: 100%;
     grid-template-rows: 23.25rem 1fr;
     gap: 0.9375rem;
+    max-height: 36.9375rem;
   }
 `
 
 export const SelectedCoffeesBox = styled.div`
-  & > div {
+  & > div:nth-child(2) {
     background: ${(props) => props.theme['base-card']};
     padding: 2.5rem;
     border-radius: 6px 44px;
