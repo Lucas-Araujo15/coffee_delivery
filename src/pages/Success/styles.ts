@@ -38,9 +38,11 @@ export const BoxOrderInfo = styled.div`
   }
 
   > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     padding: 2.5rem;
     background-color: aqua;
-    height: 300px;
     border: 1px solid transparent;
     border-radius: 6px 36px;
     background: linear-gradient(to right, white, white),

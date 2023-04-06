@@ -1,6 +1,16 @@
 import styled from 'styled-components'
 
-export const OrderInfoContainer = styled.div`
+const ICONS_COLORS = {
+  'yellow-dark': 'yellow-dark',
+  purple: 'purple',
+  yellow: 'yellow',
+} as const
+
+interface IconsProps {
+  iconColor: keyof typeof ICONS_COLORS
+}
+
+export const OrderInfoContainer = styled.div<IconsProps>`
   display: flex;
   gap: 0.75rem;
   align-items: center;
@@ -17,7 +27,7 @@ export const OrderInfoContainer = styled.div`
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
-    background-color: aqua;
+    background-color: ${(props) => props.theme[ICONS_COLORS[props.iconColor]]};
     display: flex;
     justify-content: center;
     align-items: center;

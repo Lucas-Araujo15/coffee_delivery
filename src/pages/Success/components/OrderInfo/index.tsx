@@ -9,7 +9,7 @@ interface OrderInfoProps {
 
 export function OrderInfo({ icon, color, children }: OrderInfoProps) {
   return (
-    <OrderInfoContainer>
+    <OrderInfoContainer iconColor={color}>
       <span>{icon}</span>
       <div>{children}</div>
     </OrderInfoContainer>
