@@ -107,9 +107,16 @@ export const Actions = styled.div`
     height: 100%;
     width: 2.375rem;
     border-radius: 6px;
+    transition: all 0.2s;
+    cursor: pointer;
 
     svg {
       color: ${(props) => props.theme['base-card']};
     }
+  }
+
+  span:hover {
+    transition: all 0.2s;
+    background: ${(props) => props.theme.purple};
   }
 `

@@ -7,32 +7,62 @@ import {
   Tag,
 } from './styles'
 
-import expresso from '../../../../assets/expresso.png'
 import { ShoppingCart } from '@phosphor-icons/react'
 import { Counter } from '../../../../components/Counter'
+import { useState } from 'react'
 
-export function CoffeeCard() {
+export interface CoffeeType {
+  id: number
+  image: string
+  tags: string[]
+  title: string
+  description: string
+  price: number
+}
+
+interface CoffeeCardProps {
+  coffee: CoffeeType
+}
+
+export function CoffeeCard({ coffee }: CoffeeCardProps) {
+  const [amount, setAmount] = useState(0)
+
+  function handleIncreaseAmount() {
+    setAmount((state) => state + 1)
+  }
+
+  function handleDecreaseAmount() {
+    if (amount !== 0) {
+      setAmount((state) => state - 1)
+    }
+  }
+
   return (
     <CoffeeCardContainer>
-      <img src={expresso} alt="" />
+      <img src={coffee.image} alt="Imagem meramente ilustrativa de um café" />
       <CoffeeTags>
-        <Tag>
-          <p>tradicional</p>
-        </Tag>
-        <Tag>
-          <p>com leite</p>
-        </Tag>
+        {coffee.tags.map((tag) => {
+          return (
+            <Tag key={tag}>
+              <p>{tag}</p>
+            </Tag>
+          )
+        })}
       </CoffeeTags>
       <CardDescription>
-        <p>Café com Leite</p>
-        <p>Meio a meio de expresso tradicional com leite vaporizado</p>
+        <p>{coffee.title}</p>
+        <p>{coffee.description}</p>
       </CardDescription>
       <Buy>
         <p>
-          <small>r$</small> 9,90
+          <small>r$</small> {coffee.price}
         </p>
         <Actions>
-          <Counter />
+          <Counter
+            amount={amount}
+            increaseAmount={handleIncreaseAmount}
+            decreaseAmount={handleDecreaseAmount}
+          />
           <span>
             <ShoppingCart weight="fill" size={22} />
           </span>
