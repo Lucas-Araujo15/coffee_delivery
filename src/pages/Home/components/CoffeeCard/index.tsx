@@ -10,18 +10,10 @@ import {
 import { ShoppingCart } from '@phosphor-icons/react'
 import { Counter } from '../../../../components/Counter'
 import { useState } from 'react'
-
-export interface CoffeeType {
-  id: number
-  image: string
-  tags: string[]
-  title: string
-  description: string
-  price: number
-}
+import { Coffee } from '../../../../reducers/reducer'
 
 interface CoffeeCardProps {
-  coffee: CoffeeType
+  coffee: Coffee
 }
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {

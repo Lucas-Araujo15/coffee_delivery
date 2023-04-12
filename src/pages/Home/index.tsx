@@ -1,5 +1,5 @@
 import { Banner } from './components/Banner'
-import { CoffeeCard, CoffeeType } from './components/CoffeeCard'
+import { CoffeeCard } from './components/CoffeeCard'
 import { CardList, HomeContainer } from './styles'
 
 import expresso from '../../assets/expresso.png'
@@ -16,8 +16,9 @@ import cubano from '../../assets/cubano.png'
 import havaiano from '../../assets/havaiano.png'
 import arabe from '../../assets/arabe.png'
 import irlandes from '../../assets/irlandes.png'
+import { Coffee } from '../../reducers/reducer'
 
-const AvailableCoffees: CoffeeType[] = [
+const AvailableCoffees: Coffee[] = [
   {
     id: 1,
     title: 'Expresso Tradicional',
