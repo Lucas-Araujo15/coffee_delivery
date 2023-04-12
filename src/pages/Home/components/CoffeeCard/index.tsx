@@ -9,14 +9,16 @@ import {
 
 import { ShoppingCart } from '@phosphor-icons/react'
 import { Counter } from '../../../../components/Counter'
-import { useState } from 'react'
-import { Coffee } from '../../../../reducers/reducer'
+import { ChangeEvent, useContext, useState } from 'react'
+import { Coffee, CoffeeState } from '../../../../reducers/reducer'
+import { CartContext } from '../../../../contexts/CartContext'
 
 interface CoffeeCardProps {
   coffee: Coffee
 }
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
+  const { addCoffee } = useContext(CartContext)
   const [amount, setAmount] = useState(0)
 
   function handleIncreaseAmount() {
@@ -28,6 +30,19 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
       setAmount((state) => state - 1)
     }
   }
+
+  function handleSetAmount(event: ChangeEvent<HTMLInputElement>) {
+    setAmount(parseInt(event.target.value))
+  }
+
+  // function handleAddCoffeeToCart() {
+  //   const selectedCoffee: CoffeeState = {
+  //     amount,
+  //     coffee,
+  //   }
+
+  //   addCoffee(selectedCoffee)
+  // }
 
   return (
     <CoffeeCardContainer>
@@ -52,12 +67,13 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
         <Actions>
           <Counter
             amount={amount}
+            setAmount={handleSetAmount}
             increaseAmount={handleIncreaseAmount}
             decreaseAmount={handleDecreaseAmount}
           />
-          <span>
+          <button onClick={() => addCoffee({ amount, coffee })}>
             <ShoppingCart weight="fill" size={22} />
-          </span>
+          </button>
         </Actions>
       </Buy>
     </CoffeeCardContainer>

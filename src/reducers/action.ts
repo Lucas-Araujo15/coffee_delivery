@@ -1,26 +1,44 @@
 import { CoffeeState } from './reducer'
 
 export enum ActionTypes {
-  // eslint-disable-next-line no-unused-vars
   INCREASE_AMOUNT = 'INCREASE_AMOUNT',
-  // eslint-disable-next-line no-unused-vars
   DECREASE_AMOUNT = 'DECREASE_AMOUNT',
+  ADD_COFFEE = 'ADD_COFFEE',
+  DELETE_COFFEE = 'DELETE_COFFEE',
 }
 
-export function increaseAmountAction(coffee: CoffeeState) {
+export function increaseAmountAction(idCoffee: number) {
   return {
     type: ActionTypes.INCREASE_AMOUNT,
+    payload: {
+      idCoffee,
+    },
+  }
+}
+
+export function decreaseAmountAction(idCoffee: number) {
+  return {
+    type: ActionTypes.DECREASE_AMOUNT,
+    payload: {
+      idCoffee,
+    },
+  }
+}
+
+export function addCoffeeAction(coffee: CoffeeState) {
+  return {
+    type: ActionTypes.ADD_COFFEE,
     payload: {
       coffee,
     },
   }
 }
 
-export function decreaseAmountAction(coffee: CoffeeState) {
+export function deleteCoffeeAction(idCoffee: number) {
   return {
-    type: ActionTypes.DECREASE_AMOUNT,
+    type: ActionTypes.DELETE_COFFEE,
     payload: {
-      coffee,
+      idCoffee,
     },
   }
 }

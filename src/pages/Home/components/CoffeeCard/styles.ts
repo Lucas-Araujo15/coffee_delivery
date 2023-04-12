@@ -99,7 +99,7 @@ export const Actions = styled.div`
   gap: 0.5rem;
   height: 100%;
 
-  span {
+  button:nth-child(2) {
     background: ${(props) => props.theme['purple-dark']};
     display: flex;
     justify-content: center;
@@ -109,13 +109,14 @@ export const Actions = styled.div`
     border-radius: 6px;
     transition: all 0.2s;
     cursor: pointer;
+    border: none;
 
     svg {
       color: ${(props) => props.theme['base-card']};
     }
   }
 
-  span:hover {
+  button:nth-child(2):hover {
     transition: all 0.2s;
     background: ${(props) => props.theme.purple};
   }
