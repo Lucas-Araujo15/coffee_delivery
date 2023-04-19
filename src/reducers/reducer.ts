@@ -53,6 +53,16 @@ export function coffeesReducer(state: CoffeeState[], action: any) {
       })
     }
 
+    case ActionTypes.SET_AMOUNT: {
+      const coffeeIndex = state.findIndex((selectedCoffee) => {
+        return selectedCoffee.coffee.id === action.payload.idCoffee
+      })
+
+      return produce(state, (draft) => {
+        draft[coffeeIndex].amount = action.payload.amount
+      })
+    }
+
     default:
       return state
   }

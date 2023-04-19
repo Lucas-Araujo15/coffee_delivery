@@ -2,8 +2,10 @@ import { ReactNode, createContext, useReducer } from 'react'
 import { CoffeeState, coffeesReducer } from '../reducers/reducer'
 import {
   addCoffeeAction,
+  decreaseAmountAction,
   deleteCoffeeAction,
   increaseAmountAction,
+  setAmountAction,
 } from '../reducers/action'
 
 interface CartContextType {
@@ -12,6 +14,7 @@ interface CartContextType {
   deleteCoffee: (idCoffee: number) => void
   increaseAmount: (idCoffee: number) => void
   decreaseAmount: (idCoffee: number) => void
+  setAmount: (idCoffee: number, amount: number) => void
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -36,7 +39,11 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   }
 
   function decreaseAmount(idCoffee: number) {
-    dispatch(increaseAmountAction(idCoffee))
+    dispatch(decreaseAmountAction(idCoffee))
+  }
+
+  function setAmount(idCoffee: number, amount: number) {
+    dispatch(setAmountAction(idCoffee, amount))
   }
 
   return (
@@ -47,6 +54,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         deleteCoffee,
         decreaseAmount,
         increaseAmount,
+        setAmount,
       }}
     >
       {children}

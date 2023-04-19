@@ -3,6 +3,7 @@ import { CoffeeState } from './reducer'
 export enum ActionTypes {
   INCREASE_AMOUNT = 'INCREASE_AMOUNT',
   DECREASE_AMOUNT = 'DECREASE_AMOUNT',
+  SET_AMOUNT = 'SET_AMOUNT',
   ADD_COFFEE = 'ADD_COFFEE',
   DELETE_COFFEE = 'DELETE_COFFEE',
 }
@@ -21,6 +22,16 @@ export function decreaseAmountAction(idCoffee: number) {
     type: ActionTypes.DECREASE_AMOUNT,
     payload: {
       idCoffee,
+    },
+  }
+}
+
+export function setAmountAction(idCoffee: number, amount: number) {
+  return {
+    type: ActionTypes.SET_AMOUNT,
+    payload: {
+      idCoffee,
+      amount,
     },
   }
 }

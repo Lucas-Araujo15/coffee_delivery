@@ -8,8 +8,12 @@ import {
 import { AddressForm } from './components/AddressForm'
 import { PaymentMethod } from './components/PaymentMethod'
 import { CoffeeSelected } from './components/CoffeeSelected'
+import { useContext } from 'react'
+import { CartContext } from '../../contexts/CartContext'
 
 export function Checkout() {
+  const { coffees } = useContext(CartContext)
+
   return (
     <CheckoutContainer>
       <OrderInformationBox>
@@ -23,10 +27,15 @@ export function Checkout() {
         <h2>Cafés selecionados</h2>
         <div>
           <div>
-            <CoffeeSelected />
-            <CoffeeSelected />
+            {coffees.map((coffeeAdded) => {
+              return (
+                <CoffeeSelected
+                  key={coffeeAdded.coffee.id}
+                  coffeeSelected={coffeeAdded}
+                />
+              )
+            })}
           </div>
-
           <PriceInformation>
             <div>
               <p>Total de itens</p>

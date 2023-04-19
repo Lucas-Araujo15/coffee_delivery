@@ -35,14 +35,17 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
     setAmount(parseInt(event.target.value))
   }
 
-  // function handleAddCoffeeToCart() {
-  //   const selectedCoffee: CoffeeState = {
-  //     amount,
-  //     coffee,
-  //   }
+  function handleAddCoffeeToCart() {
+    const selectedCoffee: CoffeeState = {
+      amount,
+      coffee,
+    }
 
-  //   addCoffee(selectedCoffee)
-  // }
+    addCoffee(selectedCoffee)
+    setAmount(0)
+  }
+
+  const isAmountEqualToZero = amount === 0
 
   return (
     <CoffeeCardContainer>
@@ -71,7 +74,10 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
             increaseAmount={handleIncreaseAmount}
             decreaseAmount={handleDecreaseAmount}
           />
-          <button onClick={() => addCoffee({ amount, coffee })}>
+          <button
+            disabled={isAmountEqualToZero}
+            onClick={handleAddCoffeeToCart}
+          >
             <ShoppingCart weight="fill" size={22} />
           </button>
         </Actions>
