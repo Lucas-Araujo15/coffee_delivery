@@ -8,11 +8,24 @@ import {
 import { AddressForm } from './components/AddressForm'
 import { PaymentMethod } from './components/PaymentMethod'
 import { CoffeeSelected } from './components/CoffeeSelected'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../contexts/CartContext'
 
 export function Checkout() {
   const { coffees } = useContext(CartContext)
+  const [total, setTotal] = useState(0)
+
+  useEffect(() => {
+    const totalPrice = coffees
+      .map((coffee) => {
+        return coffee.amount * coffee.coffee.price
+      })
+      .reduce(function (accumulator, currentValue) {
+        return accumulator + currentValue
+      }, 0)
+
+    setTotal(totalPrice)
+  }, [coffees])
 
   return (
     <CheckoutContainer>
@@ -39,7 +52,7 @@ export function Checkout() {
           <PriceInformation>
             <div>
               <p>Total de itens</p>
-              <p>R$ 29,70</p>
+              <p>R$ {total}</p>
             </div>
             <div>
               <p>Entrega</p>
