@@ -12,8 +12,8 @@ export function AddressForm() {
 
   useEffect(() => {
     console.log(cep)
-    if (cep.length === 9) {
-      async function fetchData(): Promise<any> {
+    if (cep.length === 8) {
+      async function fetchData() {
         const { data } = await axios(`https://viacep.com.br/ws/${cep}/json/`)
         console.log(data)
 
@@ -37,7 +37,12 @@ export function AddressForm() {
         </div>
       </CardTitle>
       <div>
-        <FormInput {...register('cep')} placeholder="CEP" />
+        <FormInput
+          maxLength={8}
+          {...register('cep')}
+          placeholder="CEP"
+          max={9}
+        />
         <FormInput {...register('logradouro')} placeholder="Rua" />
         <FormInput {...register('numero')} placeholder="Número" />
         <FormInput {...register('complemento')} placeholder="Complemento" />

@@ -65,7 +65,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
       </CardDescription>
       <Buy>
         <p>
-          <small>r$</small> {coffee.price}
+          <small>r$</small> {coffee.price.toFixed(2)}
         </p>
         <Actions>
           <Counter

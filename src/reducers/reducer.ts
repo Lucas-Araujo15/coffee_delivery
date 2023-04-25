@@ -33,7 +33,11 @@ export function coffeesReducer(state: CoffeeState[], action: any) {
       })
 
       return produce(state, (draft) => {
-        draft[coffeeIndex].amount -= 1
+        if (draft[coffeeIndex].amount === 1) {
+          draft.splice(coffeeIndex, 1)
+        } else {
+          draft[coffeeIndex].amount -= 1
+        }
       })
     }
 

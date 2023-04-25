@@ -15,6 +15,7 @@ import { CartContext } from '../../contexts/CartContext'
 import * as zod from 'zod'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { EmptyCart } from './components/EmptyCart'
 
 const addressFormValidationSchema = zod.object({
   cep: zod.string().length(9, 'Insira o cep correto!'),
@@ -59,6 +60,8 @@ export function Checkout() {
     setTotal(totalPrice)
   }, [coffees])
 
+  const isCartEmpty = coffees.length === 0
+
   return (
     <CheckoutContainer>
       <OrderInformationBox>
@@ -73,31 +76,35 @@ export function Checkout() {
       <SelectedCoffeesBox>
         <h2>Cafés selecionados</h2>
         <div>
-          <div>
-            {coffees.map((coffeeAdded) => {
-              return (
-                <CoffeeSelected
-                  key={coffeeAdded.coffee.id}
-                  coffeeSelected={coffeeAdded}
-                />
-              )
-            })}
-          </div>
+          {isCartEmpty ? (
+            <EmptyCart />
+          ) : (
+            <div>
+              {coffees.map((coffeeAdded) => {
+                return (
+                  <CoffeeSelected
+                    key={coffeeAdded.coffee.id}
+                    coffeeSelected={coffeeAdded}
+                  />
+                )
+              })}
+            </div>
+          )}
           <PriceInformation>
             <div>
               <p>Total de itens</p>
-              <p>R$ {total}</p>
+              <p>R$ {total.toFixed(2)}</p>
             </div>
             <div>
               <p>Entrega</p>
-              <p>R$ 3,50</p>
+              <p>R$ {isCartEmpty ? '0.00' : '3.50'}</p>
             </div>
             <div>
               <p>Total</p>
-              <p>R$ 33,20</p>
+              <p>R$ {isCartEmpty ? '0.00' : (total + 3.5).toFixed(2)}</p>
             </div>
           </PriceInformation>
-          <ConfirmButton>
+          <ConfirmButton disabled={isCartEmpty}>
             <p>confirmar pedido</p>
           </ConfirmButton>
         </div>

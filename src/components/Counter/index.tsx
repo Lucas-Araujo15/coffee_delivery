@@ -17,11 +17,11 @@ export function Counter({
 }: CounterProps) {
   return (
     <CounterContainer>
-      <button onClick={decreaseAmount}>
+      <button type="button" onClick={decreaseAmount}>
         <Minus size={18} />
       </button>
       <input min={0} type="number" onChange={setAmount} value={amount} />
-      <button onClick={increaseAmount}>
+      <button type="button" onClick={increaseAmount}>
         <Plus size={18} />
       </button>
     </CounterContainer>

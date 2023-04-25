@@ -51,7 +51,7 @@ export function CoffeeSelected({ coffeeSelected }: CoffeeSelectedProps) {
             </div>
           </div>
         </div>
-        <p>R$ {coffeeSelected.coffee.price}</p>
+        <p>R$ {coffeeSelected.coffee.price.toFixed(2)}</p>
       </div>
       <hr />
     </CoffeeSelectedContainer>
