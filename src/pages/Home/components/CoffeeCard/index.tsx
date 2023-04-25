@@ -18,34 +18,43 @@ interface CoffeeCardProps {
 }
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
-  const { addCoffee } = useContext(CartContext)
-  const [amount, setAmount] = useState(0)
+  const { addCoffee, coffees, setAmount } = useContext(CartContext)
+  const [amountCoffee, setAmountCoffee] = useState(0)
 
   function handleIncreaseAmount() {
-    setAmount((state) => state + 1)
+    setAmountCoffee((state) => state + 1)
   }
 
   function handleDecreaseAmount() {
-    if (amount !== 0) {
-      setAmount((state) => state - 1)
+    if (amountCoffee !== 0) {
+      setAmountCoffee((state) => state - 1)
     }
   }
 
   function handleSetAmount(event: ChangeEvent<HTMLInputElement>) {
-    setAmount(parseInt(event.target.value))
+    setAmountCoffee(parseInt(event.target.value))
   }
 
   function handleAddCoffeeToCart() {
-    const selectedCoffee: CoffeeState = {
-      amount,
-      coffee,
+    const coffeeAlreadyExists = coffees.find(
+      (cartCoffee) => cartCoffee.coffee.id === coffee.id,
+    )
+
+    if (coffeeAlreadyExists) {
+      setAmount(coffee.id, coffeeAlreadyExists.amount + amountCoffee)
+    } else {
+      const selectedCoffee: CoffeeState = {
+        amount: amountCoffee,
+        coffee,
+      }
+
+      addCoffee(selectedCoffee)
     }
 
-    addCoffee(selectedCoffee)
-    setAmount(0)
+    setAmountCoffee(0)
   }
 
-  const isAmountEqualToZero = amount === 0
+  const isAmountEqualToZero = amountCoffee === 0
 
   return (
     <CoffeeCardContainer>
@@ -69,7 +78,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
         </p>
         <Actions>
           <Counter
-            amount={amount}
+            amount={amountCoffee}
             setAmount={handleSetAmount}
             increaseAmount={handleIncreaseAmount}
             decreaseAmount={handleDecreaseAmount}

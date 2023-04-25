@@ -25,10 +25,8 @@ export const Location = styled.div`
   align-items: center;
   justify-content: space-evenly;
 
-  p {
-    font-size: 14px;
-    color: ${(props) => props.theme['purple-dark']};
-  }
+  font-size: 14px;
+  color: ${(props) => props.theme['purple-dark']};
 
   svg {
     color: ${(props) => props.theme.purple};

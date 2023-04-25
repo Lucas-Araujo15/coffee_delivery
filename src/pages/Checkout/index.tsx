@@ -29,9 +29,17 @@ const addressFormValidationSchema = zod.object({
 
 type addressFormData = zod.infer<typeof addressFormValidationSchema>
 
+export type PaymentMethodOptions = 'credit_card' | 'debit_card' | 'cash'
+
 export function Checkout() {
   const { coffees } = useContext(CartContext)
   const [total, setTotal] = useState(0)
+  const [paymentMethodSelected, setPaymentMethodSelected] =
+    useState<PaymentMethodOptions>()
+
+  function handleSelectPaymentMethod(paymentMethod: PaymentMethodOptions) {
+    setPaymentMethodSelected(paymentMethod)
+  }
 
   const addressForm = useForm<addressFormData>({
     resolver: zodResolver(addressFormValidationSchema),
@@ -70,7 +78,10 @@ export function Checkout() {
           <FormProvider {...addressForm}>
             <AddressForm />
           </FormProvider>
-          <PaymentMethod />
+          <PaymentMethod
+            paymentMethodSelected={paymentMethodSelected}
+            selectPaymentMethod={handleSelectPaymentMethod}
+          />
         </div>
       </OrderInformationBox>
       <SelectedCoffeesBox>
@@ -104,9 +115,7 @@ export function Checkout() {
               <p>R$ {isCartEmpty ? '0.00' : (total + 3.5).toFixed(2)}</p>
             </div>
           </PriceInformation>
-          <ConfirmButton disabled={isCartEmpty}>
-            <p>confirmar pedido</p>
-          </ConfirmButton>
+          <ConfirmButton disabled={isCartEmpty}>confirmar pedido</ConfirmButton>
         </div>
       </SelectedCoffeesBox>
     </CheckoutContainer>

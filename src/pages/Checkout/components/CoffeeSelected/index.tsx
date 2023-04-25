@@ -45,8 +45,8 @@ export function CoffeeSelected({ coffeeSelected }: CoffeeSelectedProps) {
                 setAmount={handleSetAmount}
               />
               <RemoveButton onClick={handleDeleteCoffee}>
-                <Trash />
-                <p>remover</p>
+                <Trash size={16} />
+                remover
               </RemoveButton>
             </div>
           </div>

@@ -83,15 +83,18 @@ export const ConfirmButton = styled.button`
   transition: 0.2s;
   cursor: pointer;
 
+  text-transform: uppercase;
+  color: ${(props) => props.theme.white};
+  font-weight: 700;
+  font-size: 0.875rem;
+
   &:hover {
     transition: 0.2s;
     background: ${(props) => props.theme['yellow-dark']};
   }
 
-  p {
-    text-transform: uppercase;
-    color: ${(props) => props.theme.white};
-    font-weight: 700;
-    font-size: 0.875rem;
+  &:disabled {
+    cursor: not-allowed;
+    background: ${(props) => props.theme['yellow-dark']};
   }
 `

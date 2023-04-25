@@ -1,8 +1,17 @@
 import { Bank, CreditCard, CurrencyDollar, Money } from '@phosphor-icons/react'
 import { Checkbox, PaymentMethodContainer } from './styles'
 import { CardTitle } from '../CardTitle'
+import { PaymentMethodOptions } from '../..'
 
-export function PaymentMethod() {
+interface PaymentMethodProps {
+  paymentMethodSelected: PaymentMethodOptions | undefined
+  selectPaymentMethod: (paymentMethod: PaymentMethodOptions) => void
+}
+
+export function PaymentMethod({
+  paymentMethodSelected,
+  selectPaymentMethod,
+}: PaymentMethodProps) {
   return (
     <PaymentMethodContainer>
       <CardTitle color="purple">
@@ -16,10 +25,24 @@ export function PaymentMethod() {
       </CardTitle>
 
       <div>
-        <input type="checkbox" id="credit" />
-        <input type="checkbox" id="debit" />
-        <input type="checkbox" id="cash" />
-
+        <input
+          onClick={() => selectPaymentMethod('credit_card')}
+          checked={paymentMethodSelected === 'credit_card'}
+          type="checkbox"
+          id="credit"
+        />
+        <input
+          onClick={() => selectPaymentMethod('debit_card')}
+          checked={paymentMethodSelected === 'debit_card'}
+          type="checkbox"
+          id="debit"
+        />
+        <input
+          onClick={() => selectPaymentMethod('cash')}
+          checked={paymentMethodSelected === 'cash'}
+          type="checkbox"
+          id="cash"
+        />
         <label htmlFor="credit">
           <Checkbox id="check-credit">
             <CreditCard size={16} />
@@ -33,7 +56,6 @@ export function PaymentMethod() {
             <p>cartão de débito</p>
           </Checkbox>
         </label>
-
         <label htmlFor="cash">
           <Checkbox id="check-cash">
             <Money size={16} />

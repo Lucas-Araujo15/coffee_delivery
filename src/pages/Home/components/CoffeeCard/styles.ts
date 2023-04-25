@@ -120,4 +120,8 @@ export const Actions = styled.div`
     transition: all 0.2s;
     background: ${(props) => props.theme.purple};
   }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
 `

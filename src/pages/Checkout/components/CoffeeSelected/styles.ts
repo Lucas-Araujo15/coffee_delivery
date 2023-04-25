@@ -65,12 +65,10 @@ export const RemoveButton = styled.button`
   transition: all 0.2s;
   cursor: pointer;
 
-  p {
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 0.75rem;
-    color: ${(props) => props.theme['base-text']};
-  }
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: ${(props) => props.theme['base-text']};
 
   svg {
     color: ${(props) => props.theme.purple};
