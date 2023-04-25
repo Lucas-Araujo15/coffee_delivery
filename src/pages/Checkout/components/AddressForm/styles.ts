@@ -26,7 +26,7 @@ export const AddressFormContainer = styled.div`
   flex-direction: column;
   gap: 2rem;
 
-  form {
+  > div {
     display: grid;
     grid-gap: 1rem 0.75rem;
     grid-template-columns: 12.5rem 17.25rem 1fr;
