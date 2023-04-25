@@ -17,13 +17,13 @@ export const HeaderContainer = styled.header`
 `
 
 export const Location = styled.div`
-  width: 8.9375rem;
+  padding: 0 10px;
   height: 2.375rem;
   background: ${(props) => props.theme['purple-light']};
   border-radius: 6px;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  gap: 0.25rem;
 
   font-size: 14px;
   color: ${(props) => props.theme['purple-dark']};

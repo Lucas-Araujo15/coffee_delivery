@@ -26,22 +26,25 @@ export function PaymentMethod({
 
       <div>
         <input
-          onClick={() => selectPaymentMethod('credit_card')}
-          checked={paymentMethodSelected === 'credit_card'}
+          onClick={() => selectPaymentMethod('Cartão de crédito')}
+          checked={paymentMethodSelected === 'Cartão de crédito'}
           type="checkbox"
           id="credit"
+          readOnly
         />
         <input
-          onClick={() => selectPaymentMethod('debit_card')}
-          checked={paymentMethodSelected === 'debit_card'}
+          onClick={() => selectPaymentMethod('Cartão de débito')}
+          checked={paymentMethodSelected === 'Cartão de débito'}
           type="checkbox"
           id="debit"
+          readOnly
         />
         <input
-          onClick={() => selectPaymentMethod('cash')}
-          checked={paymentMethodSelected === 'cash'}
+          onClick={() => selectPaymentMethod('Dinheiro')}
+          checked={paymentMethodSelected === 'Dinheiro'}
           type="checkbox"
           id="cash"
+          readOnly
         />
         <label htmlFor="credit">
           <Checkbox id="check-credit">

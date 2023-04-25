@@ -6,6 +6,7 @@ export enum ActionTypes {
   SET_AMOUNT = 'SET_AMOUNT',
   ADD_COFFEE = 'ADD_COFFEE',
   DELETE_COFFEE = 'DELETE_COFFEE',
+  DELETE_ALL = 'DELETE_ALL',
 }
 
 export function increaseAmountAction(idCoffee: number) {
@@ -51,5 +52,11 @@ export function deleteCoffeeAction(idCoffee: number) {
     payload: {
       idCoffee,
     },
+  }
+}
+
+export function deleteAllAction() {
+  return {
+    type: ActionTypes.DELETE_ALL,
   }
 }

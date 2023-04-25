@@ -6,7 +6,7 @@ import { CartContext } from '../../contexts/CartContext'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 export function Header() {
-  const { coffees } = useContext(CartContext)
+  const { coffees, order } = useContext(CartContext)
   const navigate = useNavigate()
   const cartHasCoffee = coffees?.length > 0 && coffees !== undefined
 
@@ -16,10 +16,12 @@ export function Header() {
         <img src={logo} alt="" />
       </NavLink>
       <div>
-        <Location>
-          <MapPin weight="fill" size={22} />
-          Porto Alegre, RS
-        </Location>
+        {order && (
+          <Location>
+            <MapPin weight="fill" size={22} />
+            {order?.address.cidade}, {order?.address.uf}
+          </Location>
+        )}
         <CartButton onClick={() => navigate('/checkout')}>
           <ShoppingCart weight="fill" size={22} />
           {cartHasCoffee && <span>{coffees.length}</span>}

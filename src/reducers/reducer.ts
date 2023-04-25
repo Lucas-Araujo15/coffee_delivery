@@ -67,6 +67,12 @@ export function coffeesReducer(state: CoffeeState[], action: any) {
       })
     }
 
+    case ActionTypes.DELETE_ALL: {
+      return produce(state, (draft) => {
+        draft.splice(0)
+      })
+    }
+
     default:
       return state
   }

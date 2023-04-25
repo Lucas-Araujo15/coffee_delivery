@@ -16,24 +16,38 @@ import * as zod from 'zod'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { EmptyCart } from './components/EmptyCart'
+import { CoffeeState } from '../../reducers/reducer'
+import { useNavigate } from 'react-router-dom'
 
 const addressFormValidationSchema = zod.object({
-  cep: zod.string().length(9, 'Insira o cep correto!'),
+  cep: zod.string().length(8, 'Insira o cep correto!'),
   logradouro: zod.string().min(1, 'Insira o nome da rua'),
-  numero: zod.number().min(0, 'Insira o número da residência'),
+  numero: zod.string().min(1, 'Insira o número da residência'),
   complemento: zod.string(),
   bairro: zod.string().min(1, 'Informe seu bairro'),
   cidade: zod.string().min(1, 'Insira o nome da sua cidade'),
   uf: zod.string().length(2, 'Insira a sigla do seu Estado'),
 })
 
-type addressFormData = zod.infer<typeof addressFormValidationSchema>
+export type AddressFormData = zod.infer<typeof addressFormValidationSchema>
 
-export type PaymentMethodOptions = 'credit_card' | 'debit_card' | 'cash'
+export type PaymentMethodOptions =
+  | 'Cartão de crédito'
+  | 'Cartão de débito'
+  | 'Dinheiro'
+
+export interface OrderProps {
+  address: AddressFormData
+  paymentMethod: PaymentMethodOptions
+  boughtCoffees: CoffeeState[]
+  price: number
+}
 
 export function Checkout() {
-  const { coffees } = useContext(CartContext)
+  const { coffees, handleSetOrder, deleteAll } = useContext(CartContext)
   const [total, setTotal] = useState(0)
+  const navigate = useNavigate()
+
   const [paymentMethodSelected, setPaymentMethodSelected] =
     useState<PaymentMethodOptions>()
 
@@ -41,7 +55,7 @@ export function Checkout() {
     setPaymentMethodSelected(paymentMethod)
   }
 
-  const addressForm = useForm<addressFormData>({
+  const addressForm = useForm<AddressFormData>({
     resolver: zodResolver(addressFormValidationSchema),
     defaultValues: {
       cep: '',
@@ -54,7 +68,7 @@ export function Checkout() {
     },
   })
 
-  const { handleSubmit, watch, reset } = addressForm
+  const { handleSubmit } = addressForm
 
   useEffect(() => {
     const totalPrice = coffees
@@ -68,10 +82,28 @@ export function Checkout() {
     setTotal(totalPrice)
   }, [coffees])
 
+  function handleFinalizeOrder(data: AddressFormData) {
+    const order: OrderProps = {
+      address: data,
+      boughtCoffees: coffees,
+      paymentMethod: paymentMethodSelected!,
+      price: parseFloat((total + 3.5).toFixed(2)),
+    }
+
+    localStorage.setItem('@coffee-delivery:order-1.0.0', JSON.stringify(order))
+
+    handleSetOrder()
+
+    deleteAll()
+
+    navigate('/success')
+  }
+
   const isCartEmpty = coffees.length === 0
+  const noPaymentMethod = paymentMethodSelected === undefined
 
   return (
-    <CheckoutContainer>
+    <CheckoutContainer onSubmit={handleSubmit(handleFinalizeOrder)}>
       <OrderInformationBox>
         <h2>Complete seu pedido</h2>
         <div>
@@ -115,7 +147,12 @@ export function Checkout() {
               <p>R$ {isCartEmpty ? '0.00' : (total + 3.5).toFixed(2)}</p>
             </div>
           </PriceInformation>
-          <ConfirmButton disabled={isCartEmpty}>confirmar pedido</ConfirmButton>
+          <ConfirmButton
+            type="submit"
+            disabled={isCartEmpty || noPaymentMethod}
+          >
+            confirmar pedido
+          </ConfirmButton>
         </div>
       </SelectedCoffeesBox>
     </CheckoutContainer>
